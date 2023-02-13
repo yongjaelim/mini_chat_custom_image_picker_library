@@ -1,4 +1,4 @@
-# mini_chat_custom_image_picker_library
+cd# mini_chat_custom_image_picker_library
 
 A new Flutter project.
 

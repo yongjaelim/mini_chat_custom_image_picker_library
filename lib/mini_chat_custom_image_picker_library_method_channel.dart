@@ -14,4 +14,6 @@ class MethodChannelMiniChatCustomImagePickerLibrary extends MiniChatCustomImageP
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
+  //test
 }
