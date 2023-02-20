@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:flutter/services.dart';
 import 'package:mini_chat_custom_image_picker_library/mini_chat_custom_image_picker_library.dart';
+import 'package:mini_chat_custom_image_picker_library/views/grid_photo_view.dart';
+import 'package:mini_chat_custom_image_picker_library/views/image_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   final _miniChatCustomImagePickerLibraryPlugin = MiniChatCustomImagePickerLibrary();
+  final _library = const ImageView();
 
   @override
   void initState() {
@@ -54,9 +56,11 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: Text('Running on: $_platformVersion\n'),
-        ),
+        body: GridPhotoView()
+
+        // Center(
+        //   child: Text('Running on: $_platformVersion\n'),
+        // ),
       ),
     );
   }
