@@ -11,7 +11,7 @@ class ImageViewModel with ChangeNotifier {
 
   final int _sizePerPage = 20;
   final Set<AssetEntity> _images = {};
-  final List<AssetEntity> _chosenList = <AssetEntity>[];
+  final List<AssetEntity> _pickedList = <AssetEntity>[];
 
   ImageViewModel() {
     _mediaRepository = MediaRepository();
@@ -20,7 +20,7 @@ class ImageViewModel with ChangeNotifier {
 
   List<AssetPathEntity>? get albums => _albums;
   Set<AssetEntity> get images => _images;
-  List<AssetEntity> get chosenList => _chosenList;
+  List<AssetEntity> get pickedList => _pickedList;
   int get page => _page;
 
   void updatePage() {
@@ -28,12 +28,12 @@ class ImageViewModel with ChangeNotifier {
   }
 
   void addPhotoToChosenList(AssetEntity photo) {
-    _chosenList.add(photo);
+    _pickedList.add(photo);
     notifyListeners();
   }
 
   void deletePhotoFromChosenList(AssetEntity photo) {
-    _chosenList.remove(photo);
+    _pickedList.remove(photo);
     notifyListeners();
   }
 

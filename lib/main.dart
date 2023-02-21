@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mini_chat_custom_image_picker_library/view_models/full_screen_image_view_model.dart';
 import 'package:mini_chat_custom_image_picker_library/view_models/full_screen_video_view_model.dart';
 import 'package:mini_chat_custom_image_picker_library/view_models/image_view_model.dart';
+import 'package:mini_chat_custom_image_picker_library/views/grid_photo_view.dart';
 import 'package:mini_chat_custom_image_picker_library/views/image_view.dart';
 import 'package:provider/provider.dart';
 
@@ -35,7 +36,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ],
       child: const MaterialApp(
-        home: Home(),
+        home: ImageView(),
       ),
     );
   }

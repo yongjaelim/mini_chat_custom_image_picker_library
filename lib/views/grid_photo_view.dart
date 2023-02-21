@@ -1,10 +1,9 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mini_chat_custom_image_picker_library/test_library.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:provider/provider.dart';
-
 import '../view_models/full_screen_image_view_model.dart';
 import '../view_models/full_screen_video_view_model.dart';
 import '../view_models/image_view_model.dart';
@@ -44,7 +43,6 @@ class GridPhotoView extends StatelessWidget {
     if (photoFile != null) {
       GallerySaver.saveImage(photoFile.path);
       imageViewModel.getPhotos();
-      print(imageViewModel.images.elementAt(0));
     }
   }
 
@@ -94,12 +92,12 @@ class GridPhotoView extends StatelessWidget {
         }
       },
       onTap: () async {
-        if (imageViewModel.chosenList.contains(e)) {
+        if (imageViewModel.pickedList.contains(e)) {
           imageViewModel.deletePhotoFromChosenList(e);
         } else {
           imageViewModel.addPhotoToChosenList(e);
         }
-        print(imageViewModel.chosenList);
+        print(imageViewModel.pickedList);
       },
       child: Stack(
         children: [
@@ -136,7 +134,7 @@ class GridPhotoView extends StatelessWidget {
           Positioned(
             right: 5,
             top: 5,
-            child: !imageViewModel.chosenList.contains(e)
+            child: !imageViewModel.pickedList.contains(e)
                 ? Container()
                 : Container(
                 width: 30,
@@ -149,7 +147,7 @@ class GridPhotoView extends StatelessWidget {
                 ),
                 child: CircleAvatar(
                   backgroundColor: Colors.blueAccent,
-                  child: Text((imageViewModel.chosenList.indexOf(e) + 1).toString()),
+                  child: Text((imageViewModel.pickedList.indexOf(e) + 1).toString()),
                 )),
           ),
         ],
