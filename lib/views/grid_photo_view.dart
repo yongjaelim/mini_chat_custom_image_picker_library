@@ -10,7 +10,6 @@ import '../view_models/image_view_model.dart';
 import 'full_screen_image_view.dart';
 import 'full_screen_video_view.dart';
 
-
 class GridPhotoView extends StatelessWidget {
   GridPhotoView({Key? key}) : super(key: key);
   final picker = ImagePicker();
@@ -60,98 +59,112 @@ class GridPhotoView extends StatelessWidget {
 
   Widget _photoItem(AssetEntity e, BuildContext context) {
     final imageViewModel = Provider.of<ImageViewModel>(context);
-    return GestureDetector(
-      onDoubleTap: () {
-        if (e.type == AssetType.video) {
-          _fullScreenVideoViewModel = Provider.of<FullScreenVideoViewModel>(context, listen: false);
-          _fullScreenVideoViewModel.setAssetEntity(e);
-          _fullScreenVideoViewModel.setFile(e);
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) {
-                return FullScreenVideoView();
-              }));
-        } else {
-          _fullScreenImageViewModel = Provider.of<FullScreenImageViewModel>(context, listen: false);
-          _fullScreenImageViewModel.setAssetEntity(e);
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => FullScreenImageView()));
-        }
-      },
-      onLongPress: () {
-        if (e.type == AssetType.video) {
-          _fullScreenVideoViewModel = Provider.of<FullScreenVideoViewModel>(context, listen: false);
-          _fullScreenVideoViewModel.setAssetEntity(e);
-          _fullScreenVideoViewModel.setFile(e);
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => FullScreenVideoView()));
-        } else {
-          _fullScreenImageViewModel = Provider.of<FullScreenImageViewModel>(context, listen: false);
-          _fullScreenImageViewModel.setAssetEntity(e);
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => FullScreenImageView()));
-        }
-      },
-      onTap: () async {
-        if (imageViewModel.pickedList.contains(e)) {
-          imageViewModel.deletePhotoFromChosenList(e);
-        } else {
-          imageViewModel.addPhotoToChosenList(e);
-        }
-        print(imageViewModel.pickedList);
-      },
-      child: Stack(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            height: double.infinity,
-            child: e.type == AssetType.video ? GestureDetector(
-              onTap: () {
-                _fullScreenVideoViewModel = Provider.of<FullScreenVideoViewModel>(context, listen: false);
-                _fullScreenVideoViewModel.setAssetEntity(e);
-                _fullScreenVideoViewModel.setFile(e);
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => FullScreenVideoView()));
-              },
-              child: AssetEntityImage(
-                e,
-                isOriginal: false,
-                fit: BoxFit.cover,
-              ),
-            ) : AssetEntityImage(
-              e,
-              isOriginal: false,
-              fit: BoxFit.cover,
+    return Builder(builder: (context) {
+      return GestureDetector(
+        onDoubleTap: () {
+          if (e.type == AssetType.video) {
+            _fullScreenVideoViewModel =
+                Provider.of<FullScreenVideoViewModel>(context, listen: false);
+            _fullScreenVideoViewModel.setAssetEntity(e);
+            _fullScreenVideoViewModel.setFile(e);
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return ChangeNotifierProvider<FullScreenVideoViewModel>(
+                create: (_) => FullScreenVideoViewModel(),
+                child: FullScreenVideoView(),
+              );
+            }));
+          } else {
+            _fullScreenImageViewModel =
+                Provider.of<FullScreenImageViewModel>(context, listen: false);
+            _fullScreenImageViewModel.setAssetEntity(e);
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => FullScreenImageView()));
+          }
+        },
+        onLongPress: () {
+          if (e.type == AssetType.video) {
+            _fullScreenVideoViewModel =
+                Provider.of<FullScreenVideoViewModel>(context, listen: false);
+            _fullScreenVideoViewModel.setAssetEntity(e);
+            _fullScreenVideoViewModel.setFile(e);
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => FullScreenVideoView()));
+          } else {
+            _fullScreenImageViewModel =
+                Provider.of<FullScreenImageViewModel>(context, listen: false);
+            _fullScreenImageViewModel.setAssetEntity(e);
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => FullScreenImageView()));
+          }
+        },
+        onTap: () async {
+          if (imageViewModel.pickedList.contains(e)) {
+            imageViewModel.deletePhotoFromChosenList(e);
+          } else {
+            imageViewModel.addPhotoToChosenList(e);
+          }
+          print(imageViewModel.pickedList);
+        },
+        child: Stack(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: e.type == AssetType.video
+                  ? GestureDetector(
+                      onTap: () {
+                        _fullScreenVideoViewModel =
+                            Provider.of<FullScreenVideoViewModel>(context,
+                                listen: false);
+                        _fullScreenVideoViewModel.setAssetEntity(e);
+                        _fullScreenVideoViewModel.setFile(e);
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => FullScreenVideoView()));
+                      },
+                      child: AssetEntityImage(
+                        e,
+                        isOriginal: false,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                  : AssetEntityImage(
+                      e,
+                      isOriginal: false,
+                      fit: BoxFit.cover,
+                    ),
             ),
-          ),
-          e.type == AssetType.video ? const Align(
-            alignment: Alignment.bottomRight,
-            child: Icon(
-              Icons.videocam,
-              color: Colors.white,
+            e.type == AssetType.video
+                ? const Align(
+                    alignment: Alignment.bottomRight,
+                    child: Icon(
+                      Icons.videocam,
+                      color: Colors.white,
+                    ),
+                  )
+                : Container(),
+            Positioned(
+              right: 5,
+              top: 5,
+              child: !imageViewModel.pickedList.contains(e)
+                  ? Container()
+                  : Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.blueAccent,
+                        child: Text((imageViewModel.pickedList.indexOf(e) + 1)
+                            .toString()),
+                      )),
             ),
-          )
-              : Container(),
-          Positioned(
-            right: 5,
-            top: 5,
-            child: !imageViewModel.pickedList.contains(e)
-                ? Container()
-                : Container(
-                width: 30,
-                height: 30,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.white,
-                  ),
-                ),
-                child: CircleAvatar(
-                  backgroundColor: Colors.blueAccent,
-                  child: Text((imageViewModel.pickedList.indexOf(e) + 1).toString()),
-                )),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    });
   }
 }

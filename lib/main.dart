@@ -6,10 +6,6 @@ import 'package:mini_chat_custom_image_picker_library/views/grid_photo_view.dart
 import 'package:mini_chat_custom_image_picker_library/views/image_view.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -28,18 +24,27 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(
           create: (_) => ImageViewModel(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => FullScreenVideoViewModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => FullScreenImageViewModel(),
-        ),
       ],
-      child: const MaterialApp(
-        home: ImageView(),
-      ),
+      child: ImageView()
+      // const MaterialApp(
+      //   home: ImageView(),
+      // ),
     );
   }
+}
+
+Widget anonyWidget() {
+  return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ImageViewModel(),
+        ),
+      ],
+      child: ImageView()
+    // const MaterialApp(
+    //   home: ImageView(),
+    // ),
+  );
 }
 
 class Home extends StatefulWidget {

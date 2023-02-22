@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:mini_chat_custom_image_picker_library/mini_chat_custom_image_picker_library.dart';
 import 'package:mini_chat_custom_image_picker_library/test_library.dart';
+import 'package:mini_chat_custom_image_picker_library_example/sample_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,9 +52,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home()
-    );
+    return MaterialApp(home: Home());
   }
 }
 
@@ -66,6 +65,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _library = TestLibrary();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,9 +73,9 @@ class _HomeState extends State<Home> {
           title: const Text('Plugin example app'),
         ),
         body:
-        // _library.testWidget()
+            // _library.testWidget()
 
-        Center(
+            Center(
           child: Column(
             children: [
               ElevatedButton(
@@ -84,20 +84,33 @@ class _HomeState extends State<Home> {
                 },
                 child: Text('test'),
               ),
-              if(_library.pickedList.isNotEmpty)
-              Text(_library.pickedList.first.id.toString())
+              Text(getList()),
+              Text('dkdldkkdl'),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => SampleView()));
+                },
+                child: Text('level3'),
+              )
             ],
           ),
         )
 
-      // Center(
-      //   child: Text('Running on: $_platformVersion\n'),
-      // ),
-    );
+        // Center(
+        //   child: Text('Running on: $_platformVersion\n'),
+        // ),
+        );
   }
 
-  void onClickLoadButton() {
+  void onClickLoadButton() {}
 
+  String getList() {
+    String result = '';
+    setState(() {
+      result = _library.getPickedList();
+    });
+    print('its called here');
+    return result;
   }
 }
-
