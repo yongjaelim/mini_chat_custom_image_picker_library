@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mini_chat_custom_image_picker_library/test_library.dart';
 import 'package:photo_manager/photo_manager.dart';
 import 'package:provider/provider.dart';
 import '../view_models/full_screen_image_view_model.dart';
@@ -13,8 +12,6 @@ import 'full_screen_video_view.dart';
 class GridPhotoView extends StatelessWidget {
   GridPhotoView({Key? key}) : super(key: key);
   final picker = ImagePicker();
-  late FullScreenVideoViewModel _fullScreenVideoViewModel;
-  late FullScreenImageViewModel _fullScreenImageViewModel;
 
   @override
   Widget build(BuildContext context) {
@@ -63,38 +60,47 @@ class GridPhotoView extends StatelessWidget {
       return GestureDetector(
         onDoubleTap: () {
           if (e.type == AssetType.video) {
-            _fullScreenVideoViewModel =
-                Provider.of<FullScreenVideoViewModel>(context, listen: false);
-            _fullScreenVideoViewModel.setAssetEntity(e);
-            _fullScreenVideoViewModel.setFile(e);
+            // _fullScreenVideoViewModel =
+            //     Provider.of<FullScreenVideoViewModel>(context, listen: false);
+            // _fullScreenVideoViewModel.setAssetEntity(e);
+            // _fullScreenVideoViewModel.setFile(e);
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
               return ChangeNotifierProvider<FullScreenVideoViewModel>(
-                create: (_) => FullScreenVideoViewModel(),
+                create: (_) => FullScreenVideoViewModel(e),
                 child: FullScreenVideoView(),
               );
             }));
           } else {
-            _fullScreenImageViewModel =
-                Provider.of<FullScreenImageViewModel>(context, listen: false);
-            _fullScreenImageViewModel.setAssetEntity(e);
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => FullScreenImageView()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return ChangeNotifierProvider<FullScreenImageViewModel>(
+                create: (_) => FullScreenImageViewModel(e),
+                child: FullScreenImageView(),
+              );
+            }));
           }
         },
         onLongPress: () {
           if (e.type == AssetType.video) {
-            _fullScreenVideoViewModel =
-                Provider.of<FullScreenVideoViewModel>(context, listen: false);
-            _fullScreenVideoViewModel.setAssetEntity(e);
-            _fullScreenVideoViewModel.setFile(e);
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => FullScreenVideoView()));
+            // _fullScreenVideoViewModel =
+            //     Provider.of<FullScreenVideoViewModel>(context, listen: false);
+            // _fullScreenVideoViewModel.setAssetEntity(e);
+            // _fullScreenVideoViewModel.setFile(e);
+            // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            //   return ChangeNotifierProvider<FullScreenVideoViewModel>(
+            //     create: (_) => _fullScreenVideoViewModel,
+            //     child: FullScreenVideoView(),
+            //   );
+            // }));
           } else {
-            _fullScreenImageViewModel =
-                Provider.of<FullScreenImageViewModel>(context, listen: false);
-            _fullScreenImageViewModel.setAssetEntity(e);
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => FullScreenImageView()));
+            // _fullScreenImageViewModel =
+            //     Provider.of<FullScreenImageViewModel>(context, listen: false);
+            // _fullScreenImageViewModel.setAssetEntity(e);
+            // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            //   return ChangeNotifierProvider<FullScreenImageViewModel>(
+            //     create: (_) => _fullScreenImageViewModel,
+            //     child: FullScreenImageView(),
+            //   );
+            // }));
           }
         },
         onTap: () async {
@@ -113,13 +119,19 @@ class GridPhotoView extends StatelessWidget {
               child: e.type == AssetType.video
                   ? GestureDetector(
                       onTap: () {
-                        _fullScreenVideoViewModel =
-                            Provider.of<FullScreenVideoViewModel>(context,
-                                listen: false);
-                        _fullScreenVideoViewModel.setAssetEntity(e);
-                        _fullScreenVideoViewModel.setFile(e);
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => FullScreenVideoView()));
+                        // _fullScreenVideoViewModel =
+                        //     Provider.of<FullScreenVideoViewModel>(context,
+                        //         listen: false);
+                        // _fullScreenVideoViewModel.setAssetEntity(e);
+                        // _fullScreenVideoViewModel.setFile(e);
+                        // Navigator.of(context)
+                        //     .push(MaterialPageRoute(builder: (context) {
+                        //   return ChangeNotifierProvider<
+                        //       FullScreenVideoViewModel>(
+                        //     create: (_) => _fullScreenVideoViewModel,
+                        //     child: FullScreenVideoView(),
+                        //   );
+                        // }));
                       },
                       child: AssetEntityImage(
                         e,

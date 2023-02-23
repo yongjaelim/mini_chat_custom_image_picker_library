@@ -7,6 +7,10 @@ class FullScreenImageViewModel with ChangeNotifier {
 
   AssetEntity get assetEntity => _assetEntity;
 
+  FullScreenImageViewModel(AssetEntity e) {
+    _assetEntity = e;
+  }
+
   void setAssetEntity(AssetEntity assetEntity) {
     _assetEntity = assetEntity;
     notifyListeners();

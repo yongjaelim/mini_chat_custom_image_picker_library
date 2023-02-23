@@ -11,47 +11,37 @@ class ImageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (_) => FullScreenImageViewModel(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => FullScreenVideoViewModel(),
-        ),
-      ],
-      child: Consumer<ImageViewModel>(builder: (context, imageViewModel, child) {
-        return Scaffold(
-          appBar: AppBar(
-            title: Text('recent'),
-            actions: [
-              ElevatedButton(
-                onPressed: () {
-                  getPickedList(context);
-                  print('추가버튼 눌림');
-                  print(imageViewModel.pickedList.toString());
-                  Navigator.pop(context);
-                },
-                child: Text('추가'),
-              ),
-            ],
-          ),
-          body: NotificationListener<ScrollNotification>(
-            onNotification: (ScrollNotification scroll) {
-              scrollNotification(scroll, imageViewModel);
-              return false;
-            },
-            child: SafeArea(
-              child: imageViewModel.albums == null
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : GridPhotoView(),
+    return Consumer<ImageViewModel>(builder: (context, imageViewModel, child) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('recent'),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                getPickedList(context);
+                print('추가버튼 눌림');
+                print(imageViewModel.pickedList.toString());
+                Navigator.pop(context);
+              },
+              child: Text('추가'),
             ),
+          ],
+        ),
+        body: NotificationListener<ScrollNotification>(
+          onNotification: (ScrollNotification scroll) {
+            scrollNotification(scroll, imageViewModel);
+            return false;
+          },
+          child: SafeArea(
+            child: imageViewModel.albums == null
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : GridPhotoView(),
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 
   void scrollNotification(
