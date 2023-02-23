@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../test_library.dart';
-import '../view_models/full_screen_image_view_model.dart';
-import '../view_models/full_screen_video_view_model.dart';
 import '../view_models/image_view_model.dart';
 import 'grid_photo_view.dart';
 
@@ -51,17 +49,10 @@ class ImageView extends StatelessWidget {
     }
   }
 
-  void getImage() {
-    print("here");
-  }
 
   void getPickedList(BuildContext context) {
     final imageViewModel = Provider.of<ImageViewModel>(context, listen: false);
     TestLibrary testLibrary = TestLibrary();
     testLibrary.pickedList = imageViewModel.pickedList;
-  }
-
-  Widget testWidget() {
-    return GridPhotoView();
   }
 }

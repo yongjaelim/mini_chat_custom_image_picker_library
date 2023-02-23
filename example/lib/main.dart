@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => SampleView()));
+                      MaterialPageRoute(builder: (context) => const SampleView()));
                 },
                 child: Text('level3'),
               )
