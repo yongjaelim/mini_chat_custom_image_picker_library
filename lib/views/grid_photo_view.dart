@@ -81,26 +81,9 @@ class GridPhotoView extends StatelessWidget {
         },
         onLongPress: () {
           if (e.type == AssetType.video) {
-            // _fullScreenVideoViewModel =
-            //     Provider.of<FullScreenVideoViewModel>(context, listen: false);
-            // _fullScreenVideoViewModel.setAssetEntity(e);
-            // _fullScreenVideoViewModel.setFile(e);
-            // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            //   return ChangeNotifierProvider<FullScreenVideoViewModel>(
-            //     create: (_) => _fullScreenVideoViewModel,
-            //     child: FullScreenVideoView(),
-            //   );
-            // }));
+
           } else {
-            // _fullScreenImageViewModel =
-            //     Provider.of<FullScreenImageViewModel>(context, listen: false);
-            // _fullScreenImageViewModel.setAssetEntity(e);
-            // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-            //   return ChangeNotifierProvider<FullScreenImageViewModel>(
-            //     create: (_) => _fullScreenImageViewModel,
-            //     child: FullScreenImageView(),
-            //   );
-            // }));
+
           }
         },
         onTap: () async {
@@ -119,19 +102,7 @@ class GridPhotoView extends StatelessWidget {
               child: e.type == AssetType.video
                   ? GestureDetector(
                       onTap: () {
-                        // _fullScreenVideoViewModel =
-                        //     Provider.of<FullScreenVideoViewModel>(context,
-                        //         listen: false);
-                        // _fullScreenVideoViewModel.setAssetEntity(e);
-                        // _fullScreenVideoViewModel.setFile(e);
-                        // Navigator.of(context)
-                        //     .push(MaterialPageRoute(builder: (context) {
-                        //   return ChangeNotifierProvider<
-                        //       FullScreenVideoViewModel>(
-                        //     create: (_) => _fullScreenVideoViewModel,
-                        //     child: FullScreenVideoView(),
-                        //   );
-                        // }));
+
                       },
                       child: AssetEntityImage(
                         e,
