@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:video_player/video_player.dart';
-import '../models/image_model.dart';
 import '../repositories/media_repository.dart';
 
 class ImageViewModel with ChangeNotifier {

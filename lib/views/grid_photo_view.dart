@@ -60,10 +60,6 @@ class GridPhotoView extends StatelessWidget {
       return GestureDetector(
         onDoubleTap: () {
           if (e.type == AssetType.video) {
-            // _fullScreenVideoViewModel =
-            //     Provider.of<FullScreenVideoViewModel>(context, listen: false);
-            // _fullScreenVideoViewModel.setAssetEntity(e);
-            // _fullScreenVideoViewModel.setFile(e);
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
               return ChangeNotifierProvider<FullScreenVideoViewModel>(
                 create: (_) => FullScreenVideoViewModel(e),
